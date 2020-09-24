@@ -9,6 +9,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 
 	"github.com/globalsign/mgo/bson"
+	"github.com/robfig/cron"
 
 	"github.com/spf13/viper"
 
@@ -26,14 +27,17 @@ func main() {
 	log.Println("started..")
 	config.Config()
 	DbConnect()
+	c := cron.New()
+	c.AddFunc("@daily", service.Sheduler)
+	c.Start()
 	s := rpc.NewServer()
-	s.RegisterCodec(json.NewCodec(), "application.json")
+	s.RegisterCodec(json.NewCodec(), "application/json")
 	s.RegisterService(new(service.UserService), "")
 	r := mux.NewRouter()
 	rrpc := r.PathPrefix("/rpc").Subrouter()
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("static")))
 	rrpc.Handle("", s)
-
+	log.Println("connected to port", viper.GetString("Port"))
 	err := http.ListenAndServe(viper.GetString("Port"), r)
 	if err != nil {
 		log.Panic("err:", err)
@@ -41,7 +45,7 @@ func main() {
 
 }
 func DbConnect() {
-	err1 := db.Connect(viper.GetString("MongoURL"), viper.GetString("MongoDBname"))
+	err1 := db.Connect(viper.GetString("MongoURL"), viper.GetString("MongoDB"))
 	if err1 != nil {
 		log.Fatalf("Db connection failed", err1)
 	}
@@ -52,7 +56,7 @@ func DbConnect() {
 	if err2 != nil {
 		log.Println(err2)
 	}
-	err3 := db.UniqueIndex(&student, []string{"RollNo"})
+	err3 := db.UniqueIndex(&student, []string{"rollNo"})
 	if err3 != nil {
 		log.Println(err2)
 	}

@@ -17,7 +17,7 @@ import (
 type UserService struct {
 }
 
-func (f *UserService) AddStudent(r http.Request, student *dto.Student, reply *string) error {
+func (f *UserService) AddStudent(r *http.Request, student *dto.Student, reply *string) error {
 	student.Id = bson.NewObjectId()
 	pass := []byte(student.Password)
 	student.Password = ""
@@ -41,7 +41,7 @@ func (f *UserService) AddStudent(r http.Request, student *dto.Student, reply *st
 	*reply = "Inserted Successfully"
 	return nil
 }
-func (f *UserService) GetAdmin(r http.Request, admin *dto.Admin, reply *[]dto.Admin) error {
+func (f *UserService) GetAdmin(r *http.Request, admin *dto.Admin, reply *[]dto.Admin) error {
 	err := db.Find(&reply, nil)
 	if err != nil {
 		return err
@@ -49,7 +49,7 @@ func (f *UserService) GetAdmin(r http.Request, admin *dto.Admin, reply *[]dto.Ad
 	return nil
 
 }
-func (f *UserService) GetStudent(r http.Request, admin *dto.Student, reply *[]dto.Student) error {
+func (f *UserService) GetStudent(r *http.Request, admin *dto.Student, reply *[]dto.Student) error {
 	err := db.Find(&reply, nil)
 	if err != nil {
 		return err
@@ -57,7 +57,7 @@ func (f *UserService) GetStudent(r http.Request, admin *dto.Student, reply *[]dt
 	return nil
 
 }
-func (f *UserService) AddAdmin(r http.Request, admin *dto.Admin, reply *string) error {
+func (f *UserService) AddAdmin(r *http.Request, admin *dto.Admin, reply *string) error {
 	admin.Id = bson.NewObjectId()
 	pass := []byte(admin.Password)
 	admin.Password = ""
@@ -101,22 +101,55 @@ func LoginAdmin(args *dto.Admin, reply *string) error {
 	return nil
 
 }
-func (f *UserService) FeedBack(r http.Request, params *dto.Student, reply *string) error {
+func (f *UserService) FeedBack(r *http.Request, params *dto.Response, reply *string) error {
 	t := time.Now()
 	t1 := t.Hour()
 	log.Println("time is:", t1)
 	var err error
 	if t1 >= 12 && t1 <= 18 {
-		err = db.Update(&params, bson.M{"RollNo": params.RollNo}, bson.M{"$set": bson.M{"BreakFast": params.BreakFast}})
+		err = db.Update(&params, bson.M{"time": params.Time}, bson.M{"$set": bson.M{"BreakFast": params.BreakFast}})
 	} else if t1 >= 18 && t1 <= 23 {
-		err = db.Update(&params, bson.M{"RollNo": params.RollNo}, bson.M{"$set": bson.M{"Lunch": params.Lunch}})
+		err = db.Update(&params, bson.M{"time": params.Time}, bson.M{"$set": bson.M{"Lunch": params.Lunch}})
 	} else if t1 >= 8 && t1 <= 12 {
-		err = db.Update(&params, bson.M{"RollNo": params.RollNo}, bson.M{"$set": bson.M{"Dinner": params.Dinner}})
+		err = db.Update(&params, bson.M{"time": params.Time}, bson.M{"$set": bson.M{"Dinner": params.Dinner}})
 	}
 	if err != nil {
 		log.Println("err to update:", err)
 	}
 
 	return nil
+
+}
+func (f *UserService) GetData(r *http.Request, params *dto.Student, reply *string) error {
+	err := db.Find(&params, nil)
+	if err != nil {
+		log.Println(err)
+	}
+	log.Println(params)
+	return nil
+}
+func Sheduler() {
+	var std []dto.Student
+	var res dto.Response
+	count, err := db.Count(&std)
+	if err != nil {
+		log.Println(err)
+	}
+	log.Println(count)
+	err1 := db.Find(&std, nil)
+	if err1 != nil {
+		log.Println(err1)
+	}
+	for i := 0; i < count; i++ {
+		res.RollNo = std[i].RollNo
+		res.Name = std[i].Name
+		res.BreakFast = 0
+		res.Lunch = 0
+		res.Dinner = 0
+		err := db.Insert(res)
+		if err != nil {
+			log.Println(err)
+		}
+	}
 
 }
