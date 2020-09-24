@@ -1,0 +1,5 @@
+{
+    "MongoURL":"localhost:27017",
+    "MongoDB":"Trial",
+    "Port":":8000"
+}
