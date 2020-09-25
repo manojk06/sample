@@ -13,6 +13,8 @@ export class LoginComponent implements OnInit {
  
  email:any
  password:any
+ rollNo:number
+ password1:any
  obj:{}
   
   constructor(public router:Router,private http:HttpClient) { }
@@ -31,9 +33,21 @@ this.http.post<any>('/login',this.obj).subscribe(data =>{
   
   if(data=='Login successfully'){
     this.router.navigate(['/add'])
-  }else if(data == 'student'){
-    this.router.navigate(['/emp'])
+  }else {
+    this.router.navigate(['/login'])
   }
+
+})
+
+}
+submit1(){
+  // localStorage.setItem('mail',this.email)
+  this.obj={"rollNo":this.rollNo,"password":this.password1}
+  
+this.http.post<any>('/loginstudent',this.obj).subscribe(data =>{
+  // localStorage.setItem('data',data)
+  console.log(data)
+  // localStorage.setItem('role',data)
 
 })
 

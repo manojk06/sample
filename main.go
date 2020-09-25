@@ -35,6 +35,7 @@ func main() {
 	s.RegisterService(new(service.UserService), "")
 	r := mux.NewRouter()
 	r.HandleFunc("/login", Login)
+	r.HandleFunc("/loginstudent", LoginStudent)
 	rrpc := r.PathPrefix("/rpc").Subrouter()
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("static")))
 	rrpc.Handle("", s)
@@ -85,6 +86,23 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 	var reply string
 	err1 := service.LoginAdmin(&admin, &reply)
+	if err1 != nil {
+		http.Error(w, "Invalid credential", 401)
+	} else {
+		j.NewEncoder(w).Encode(reply)
+	}
+
+}
+func LoginStudent(w http.ResponseWriter, r *http.Request) {
+	log.Println("loginstudent called....")
+	var std dto.Student
+	body, _ := ioutil.ReadAll(r.Body)
+	err := j.Unmarshal(body, &std)
+	if err != nil {
+		log.Println("unmarshal error", err)
+	}
+	var reply string
+	err1 := service.LoginStudent(&std, &reply)
 	if err1 != nil {
 		http.Error(w, "Invalid credential", 401)
 	} else {

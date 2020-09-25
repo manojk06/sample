@@ -101,6 +101,25 @@ func LoginAdmin(args *dto.Admin, reply *string) error {
 	return nil
 
 }
+func LoginStudent(args *dto.Student, reply *string) error {
+	var result dto.Student
+	err := db.Find(&result, bson.M{"rollNo": args.RollNo})
+	if err != nil {
+		if strings.Contains(err.Error(), "not found") {
+			return fmt.Errorf("invalid creditional")
+		}
+	}
+	err = bcrypt.CompareHashAndPassword(result.Hash, []byte(args.Password))
+	if err == nil {
+		*reply = result.Name
+	} else {
+		log.Println("error in validation  :", err)
+		return fmt.Errorf("invalid creditional")
+	}
+
+	return nil
+
+}
 func (f *UserService) FeedBack(r *http.Request, params *dto.Response, reply *string) error {
 	t := time.Now()
 	t1 := t.Hour()
