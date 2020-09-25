@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Food - Ratings</span>
+      <span style="flex: 1 1 auto;"></span>
+      <span style="text-decoration: none;color: floralwhite;">{{ time | date:'medium' }}</span>&nbsp;&nbsp;
+ <span *ngIf="(choose!='/login')&&(choose!='/')">
+<a style="text-decoration: none;color: floralwhite;" [routerLink]="['emp']" >Student</a>&nbsp;
+<a style="text-decoration: none;color: floralwhite;" *ngIf="(service.getrole() =='Login successfully')" [routerLink]="['add']">Admin</a>&nbsp;
+<a style="text-decoration: none;color: floralwhite;cursor: pointer;" [matMenuTriggerFor]="menu">{{service.getmail()}}</a>
+</span>
+
+<mat-menu #menu="matMenu" xPosition="before">
+  <button mat-menu-item (click)="logout()"> Logout </button>
+</mat-menu>
+    </mat-toolbar-row>
+    </mat-toolbar><br> 
+<router-outlet></router-outlet>

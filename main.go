@@ -28,12 +28,13 @@ func main() {
 	config.Config()
 	DbConnect()
 	c := cron.New()
-	c.AddFunc("@daily", service.Sheduler)
+	c.AddFunc("@every 2m", service.Sheduler)
 	c.Start()
 	s := rpc.NewServer()
 	s.RegisterCodec(json.NewCodec(), "application/json")
 	s.RegisterService(new(service.UserService), "")
 	r := mux.NewRouter()
+	r.HandleFunc("/login", Login)
 	rrpc := r.PathPrefix("/rpc").Subrouter()
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("static")))
 	rrpc.Handle("", s)
@@ -56,7 +57,7 @@ func DbConnect() {
 	if err2 != nil {
 		log.Println(err2)
 	}
-	err3 := db.UniqueIndex(&student, []string{"rollno"})
+	err3 := db.UniqueIndex(&student, []string{"rollNo"})
 	if err3 != nil {
 		log.Println(err2)
 	}

@@ -14,7 +14,7 @@ type Admin struct {
 type Student struct {
 	Id       bson.ObjectId `bson:"_id,omitempty"`
 	Name     string        `json:"Name,omitempty", bson:"Name,omitempty"`
-	RollNo   int           `json:"RollNo,omitempty", bson:"RollNo,omitempty"`
+	RollNo   int           `json:"rollNo,omitempty", bson:"rollNo,omitempty"`
 	Password string        `json:"password"bson:"password"`
 	Hash     []byte        `json:"hash"bson:"hash"`
 }
