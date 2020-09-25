@@ -129,8 +129,12 @@ func (f *UserService) GetData(r *http.Request, params *dto.Student, reply *strin
 	return nil
 }
 func Sheduler() {
+	log.Println("cron called")
 	var std []dto.Student
 	var res dto.Response
+	time := time.Now()
+	day := time.Format("2006-January-02")
+	log.Println("today :", day)
 	count, err := db.Count(&std)
 	if err != nil {
 		log.Println(err)
@@ -143,13 +147,15 @@ func Sheduler() {
 	for i := 0; i < count; i++ {
 		res.RollNo = std[i].RollNo
 		res.Name = std[i].Name
+		res.Time = day
 		res.BreakFast = 0
 		res.Lunch = 0
 		res.Dinner = 0
-		err := db.Insert(res)
+		err := db.Insert(&res)
 		if err != nil {
 			log.Println(err)
 		}
 	}
+	log.Println("table created")
 
 }
