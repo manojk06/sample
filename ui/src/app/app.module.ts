@@ -11,8 +11,7 @@ import { AppService } from './app.service';
 import { InterInterceptor } from './inter.interceptor';
 import {ToastrModule} from'ngx-toastr';
 import { EmpComponent } from './emp/emp.component';
-import {AdduserComponent}from './adduser/adduser.component';
-import { AddempComponent } from './addemp/addemp.component';
+
 
 @NgModule({
   declarations: [
@@ -20,8 +19,6 @@ import { AddempComponent } from './addemp/addemp.component';
     AddComponent,
     LoginComponent,
     EmpComponent,
-    AddempComponent,
-    AdduserComponent
   ],
   imports: [
     AppRoutingModule,

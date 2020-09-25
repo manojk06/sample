@@ -41,13 +41,18 @@ this.http.post<any>('/login',this.obj).subscribe(data =>{
 
 }
 submit1(){
-  // localStorage.setItem('mail',this.email)
+  let roll=this.rollNo.toString()
+  localStorage.setItem('rollNo',roll)
   this.obj={"rollNo":this.rollNo,"password":this.password1}
   
 this.http.post<any>('/loginstudent',this.obj).subscribe(data =>{
-  // localStorage.setItem('data',data)
   console.log(data)
-  // localStorage.setItem('role',data)
+  localStorage.setItem('name',data)
+  if(data){
+    this.router.navigate(['/emp'])
+  }else{
+    this.router.navigate(['/login'])
+  }
 
 })
 

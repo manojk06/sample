@@ -28,43 +28,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color:rgb(80, 80,100);
   }
   .btn {
-    color: white;
-    padding: 8px 12px;
+    padding: 10px 14px;
     border: none;
     cursor: pointer;
     width: 50%;
     opacity: 0.9;
     left: 50px;
-    
+    color:blue;
+    background-color:white;
   } 
-  
-  .btn:hover {
-    opacity: 1;
-  } 
-  ::ng-deep .mat-form-field{
-    color:red
-}
+ 
   .mat-form-field-empty.mat-form-field-label {
     color:white;
   }
-  /* .mat-form-field-underline {
-    background-color:white;
-    color:white;
-  } */
- /* .background {
-    background: none repeat scroll 0 0 #FFFFFF;
-    height: 200%;
-    left: -50%;
-    position: fixed;
-    width: 200%;}
-
-.background img{
-    display: block;
-    margin: auto;
-    min-height: 50%;
-    min-width: 50%;
-}
-  
-  .text-block {
-    text-align: center;
-  }  */
+  .time{
+    flex: 1 1 auto;
+    margin-left: 250px;
+    text-decoration: none;
+    color: floralwhite;
+  }

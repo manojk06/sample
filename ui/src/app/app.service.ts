@@ -17,6 +17,12 @@ getmail(){
 getrole(){
   return localStorage.getItem('role')
 }
+getrollNo(){
+  return localStorage.getItem('rollNo')
+}
+getName(){
+  return localStorage.getItem('name')
+}
 
 
 }
