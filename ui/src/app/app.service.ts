@@ -6,30 +6,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http:HttpClient) { }
 
-  getPost(obj) {
-    return this.http.post<any>('/rpc', obj)
-  }
-  getmail() {
-    return localStorage.getItem('mail')
-  }
-  getrole() {
-    return localStorage.getItem('role')
-  }
-  setRollNo(rollno) {
-    localStorage.setItem('rollno', rollno)
-  }
-  getRollNo() {
-    return localStorage.getItem('rollno')
-  }
-  setStudent(name) {
-    localStorage.setItem('name', name)
-  }
-  getStudent() {
-    return localStorage.getItem('name')
-  }
-
+getPost(obj){
+  return this.http.post<any>('/rpc',obj)
+}
+getmail(){
+  return localStorage.getItem('mail')
+}
+getrole(){
+  return localStorage.getItem('role')
+}
 
 
 }

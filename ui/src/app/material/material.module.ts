@@ -10,17 +10,15 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTableModule} from '@angular/material/table';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatRadioModule} from '@angular/material/radio';
-
 
 @NgModule({
   imports:[
     CommonModule,FormsModule,MatIconModule,MatInputModule,MatButtonModule,MatToolbarModule,
-    MatTableModule,MatMenuModule,MatPaginatorModule, MatRadioModule
+    MatTableModule,MatMenuModule,MatPaginatorModule
   ],
   exports:[
     CommonModule,FormsModule,MatIconModule,MatInputModule,MatButtonModule,MatToolbarModule,
-    MatTableModule,MatMenuModule,MatPaginatorModule,MatRadioModule
+    MatTableModule,MatMenuModule,MatPaginatorModule
   ]
 })
 
