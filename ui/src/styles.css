@@ -47,3 +47,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     text-decoration: none;
     color: floralwhite;
   }
+  .container-3 {
+    width: 669px;
+    position: absolute;
+    max-width: 636px;
+    margin-top: 87px;
+    margin-left: 293px;
+    
+    background-color:rgb(252, 252, 253);
+  }

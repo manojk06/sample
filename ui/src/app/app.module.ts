@@ -11,7 +11,7 @@ import { AppService } from './app.service';
 import { InterInterceptor } from './inter.interceptor';
 import {ToastrModule} from'ngx-toastr';
 import { EmpComponent } from './emp/emp.component';
-import {RatingComponent} from './rating/rating.component'
+import {RatingComponent, ConfirmDialogComponent} from './rating/rating.component'
 import { DatePipe } from '@angular/common';
 
 @NgModule({
@@ -20,7 +20,8 @@ import { DatePipe } from '@angular/common';
     AddComponent,
     LoginComponent,
     EmpComponent,
-    RatingComponent
+    RatingComponent,
+    ConfirmDialogComponent,
     
   ],
   imports: [

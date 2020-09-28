@@ -11,17 +11,19 @@ import {MatTableModule} from '@angular/material/table';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatRadioModule} from '@angular/material/radio';
+import { MatDialogModule } from '@angular/material/dialog';
 
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
   imports:[
     CommonModule,FormsModule,MatIconModule,MatInputModule,MatButtonModule,MatToolbarModule,
-    MatTableModule,MatMenuModule,MatPaginatorModule,MatRadioModule,
+    MatTableModule,MatMenuModule,MatPaginatorModule,MatRadioModule,MatCardModule,MatDialogModule
   ],
   exports:[
     CommonModule,FormsModule,MatIconModule,MatInputModule,MatButtonModule,MatToolbarModule,
-    MatTableModule,MatMenuModule,MatPaginatorModule,MatRadioModule,
+    MatTableModule,MatMenuModule,MatPaginatorModule,MatRadioModule,MatCardModule,MatDialogModule
   ]
 })
 
