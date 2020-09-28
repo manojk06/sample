@@ -22,6 +22,7 @@ type Response struct {
 	RollNo    int    `json:"RollNo,omitempty", bson:"RollNo,omitempty"`
 	Name      string `json:"Name,omitempty", bson:"Name,omitempty"`
 	Time      string `json:"time,omitempty", bson:"time,omitempty"`
+	Value     int    `json:"value,omitempty",bson:"value,omitempty"`
 	BreakFast int    `json:"BreakFast,omitempty", bson:"BreakFast,omitempty"`
 	Lunch     int    `json:"Lunch,omitempty", bson:"Lunch,omitempty"`
 	Dinner    int    `json:"Dinner,omitempty", bson:"Dinner,omitempty"`

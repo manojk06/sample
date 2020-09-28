@@ -102,8 +102,9 @@ func LoginAdmin(args *dto.Admin, reply *string) error {
 
 }
 func LoginStudent(args *dto.Student, reply *string) error {
+
 	var result dto.Student
-	err := db.Find(&result, bson.M{"rollNo": args.RollNo})
+	err := db.Find(&result, bson.M{"rollno": args.RollNo})
 	if err != nil {
 		if strings.Contains(err.Error(), "not found") {
 			return fmt.Errorf("invalid creditional")
@@ -123,18 +124,22 @@ func LoginStudent(args *dto.Student, reply *string) error {
 func (f *UserService) FeedBack(r *http.Request, params *dto.Response, reply *string) error {
 	t := time.Now()
 	t1 := t.Hour()
+	log.Println("rollno :", params.RollNo)
 	log.Println("time is:", t1)
+	log.Println(params.Time)
 	var err error
 	if t1 >= 12 && t1 <= 18 {
-		err = db.Update(&params, bson.M{"time": params.Time}, bson.M{"$set": bson.M{"BreakFast": params.BreakFast}})
+		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"breakfast": params.Value}})
 	} else if t1 >= 18 && t1 <= 23 {
-		err = db.Update(&params, bson.M{"time": params.Time}, bson.M{"$set": bson.M{"Lunch": params.Lunch}})
+		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"lunch": params.Value}})
 	} else if t1 >= 8 && t1 <= 12 {
-		err = db.Update(&params, bson.M{"time": params.Time}, bson.M{"$set": bson.M{"Dinner": params.Dinner}})
+		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"dinner": params.Value}})
 	}
 	if err != nil {
 		log.Println("err to update:", err)
+		return err
 	}
+	*reply = "Updated Successfully"
 
 	return nil
 

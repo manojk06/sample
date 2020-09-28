@@ -5,6 +5,7 @@ import {LoginComponent} from './login/login.component'
 import { EmpComponent } from './emp/emp.component';
 import { AdduserComponent } from './adduser/adduser.component';
 import { AddempComponent } from './addemp/addemp.component';
+import { RatingComponent } from './rating/rating.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'login',pathMatch:'full'},
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path:'emp',component:EmpComponent},
   {path:'adduser',component:AdduserComponent},
   {path:'addemp',component:AddempComponent},
+  {path:'ratings',component:RatingComponent},
 ];
 
 @NgModule({
