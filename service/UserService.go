@@ -126,11 +126,11 @@ func (f *UserService) FeedBack(r *http.Request, params *dto.Response, reply *str
 	log.Println("time is:", t1)
 	var err error
 	if t1 >= 12 && t1 <= 18 {
-		err = db.Update(&params, bson.M{"time": params.Time}, bson.M{"$set": bson.M{"BreakFast": params.BreakFast}})
+		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"breakfast": params.BreakFast}})
 	} else if t1 >= 18 && t1 <= 23 {
-		err = db.Update(&params, bson.M{"time": params.Time}, bson.M{"$set": bson.M{"Lunch": params.Lunch}})
+		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"lunch": params.Lunch}})
 	} else if t1 >= 8 && t1 <= 12 {
-		err = db.Update(&params, bson.M{"time": params.Time}, bson.M{"$set": bson.M{"Dinner": params.Dinner}})
+		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"dinner": params.Dinner}})
 	}
 	if err != nil {
 		log.Println("err to update:", err)

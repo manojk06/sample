@@ -58,7 +58,7 @@ func DbConnect() {
 	if err2 != nil {
 		log.Println(err2)
 	}
-	err3 := db.UniqueIndex(&student, []string{"rollNo"})
+	err3 := db.UniqueIndex(&student, []string{"rollno"})
 	if err3 != nil {
 		log.Println(err2)
 	}

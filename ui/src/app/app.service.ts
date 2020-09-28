@@ -23,6 +23,18 @@ getrollNo(){
 getName(){
   return localStorage.getItem('name')
 }
+setRollNo(rollno){
+  localStorage.setItem('rollno',rollno)
+}
+getRollNo(){
+  return localStorage.getItem('rollno')
+}
+setStudent(name){
+  localStorage.setItem('name',name)
+}
+getStudent(){
+  return localStorage.getItem('name')
+}
 
 
 }

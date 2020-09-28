@@ -11,7 +11,8 @@ import { AppService } from './app.service';
 import { InterInterceptor } from './inter.interceptor';
 import {ToastrModule} from'ngx-toastr';
 import { EmpComponent } from './emp/emp.component';
-
+import {RatingComponent} from './rating/rating.component'
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,8 @@ import { EmpComponent } from './emp/emp.component';
     AddComponent,
     LoginComponent,
     EmpComponent,
+    RatingComponent
+    
   ],
   imports: [
     AppRoutingModule,
@@ -28,7 +31,7 @@ import { EmpComponent } from './emp/emp.component';
     HttpClientModule,
     ToastrModule.forRoot()
   ],
-  providers: [AppService,{ provide: HTTP_INTERCEPTORS, useClass: InterInterceptor, multi: true }],
+  providers: [AppService,{ provide: HTTP_INTERCEPTORS, useClass: InterInterceptor, multi: true },DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
