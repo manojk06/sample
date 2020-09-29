@@ -103,7 +103,7 @@ func LoginAdmin(args *dto.Admin, reply *string) error {
 }
 func LoginStudent(args *dto.Student, reply *string) error {
 	var result dto.Student
-	err := db.Find(&result, bson.M{"rollNo": args.RollNo})
+	err := db.Find(&result, bson.M{"rollno": args.RollNo})
 	if err != nil {
 		if strings.Contains(err.Error(), "not found") {
 			return fmt.Errorf("invalid creditional")

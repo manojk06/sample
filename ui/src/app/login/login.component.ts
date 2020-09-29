@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
   submit1() {
     let roll = this.rollNo.toString()
     localStorage.setItem('rollNo', roll)
-    this.obj = { "rollNo": this.rollNo, "password": this.password1 }
+    this.obj = { "rollno": this.rollNo, "password": this.password1 }
 
     this.http.post<any>('/loginstudent', this.obj).subscribe(data => {
       console.log(data)

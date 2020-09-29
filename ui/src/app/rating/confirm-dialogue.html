@@ -1,10 +1,10 @@
 <mat-dialog-content class="mat-typography">
-    <h3>The Ratings of {{data.duration}} is {{data.result}}</h3>
+    <h3>Your  Ratings of {{data.duration}} is {{data.result}} </h3>
 
 </mat-dialog-content>
 
 <mat-dialog-actions align="center">
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Confirm</button>
-    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button  color="primary" [mat-dialog-close]="true" cdkFocusInitial>Confirm</button>
+    <button mat-raised-button color="accent" (click)="onNoClick()">Cancel</button>
    
   </mat-dialog-actions>

@@ -1,21 +1,20 @@
-<div class="background">
+<div class="background1">
     <div class="container-3">
         <mat-card>
             <mat-card-content>
-                <h1 style="margin-left: 259px;">Hi {{appService.getStudent()}}</h1>
-                <h2 style=" position: relative;
-                left: 190px;">Your Ratings for {{duration}}</h2>
-                <div style="margin-left: 295px;">
+                <h1>Hi {{appService.getStudent()}},</h1>
+                <h2>Give Your Food Ratings for {{duration}}</h2>
+                <div style="text-align: center;">
                     <mat-radio-group aria-label="Select an option" [(ngModel)]="value">
-                        <mat-radio-button value="1">1</mat-radio-button>
+                        <mat-radio-button value="1">Bad</mat-radio-button>
                         <br>
-                        <mat-radio-button value="2">2</mat-radio-button>
+                        <mat-radio-button value="2">Average</mat-radio-button>
                         <br>
-                        <mat-radio-button value="3">3</mat-radio-button>
+                        <mat-radio-button value="3">Ok</mat-radio-button>
                         <br>
-                        <mat-radio-button value="4">4</mat-radio-button>
+                        <mat-radio-button value="4">Good</mat-radio-button>
                         <br>
-                        <mat-radio-button value="5">5</mat-radio-button>
+                        <mat-radio-button value="5">Awesome</mat-radio-button>
                         <br>
                     </mat-radio-group>
                 </div>
