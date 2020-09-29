@@ -1,6 +1,9 @@
 <mat-dialog-content class="mat-typography">
-    <h3>Your  Ratings of {{data.duration}} is {{data.result}} </h3>
-
+    <span *ngIf="data.result == 1"><h3>Your  Ratings of {{data.duration}} is</h3><h3 style="color: crimson;text-align: center;">Bad</h3></span>
+    <span *ngIf="data.result == 2"><h3>Your  Ratings of {{data.duration}} is</h3><h3 style="color: blue;text-align: center;">Average</h3></span>
+    <span *ngIf="data.result == 3"><h3>Your  Ratings of {{data.duration}} is</h3><h3 style="color: yellowgreen;text-align: center;">Ok</h3></span>
+    <span *ngIf="data.result == 4"><h3>Your  Ratings of {{data.duration}} is</h3><h3 style="color: green;text-align: center;">Good</h3></span>
+    <span *ngIf="data.result == 5"><h3>Your  Ratings of {{data.duration}} is</h3><h3 style="color: hotpink;text-align: center;">Super</h3></span>
 </mat-dialog-content>
 
 <mat-dialog-actions align="center">

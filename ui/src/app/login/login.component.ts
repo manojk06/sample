@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('role', data)
 
       if (data == 'Login successfully') {
-        this.router.navigate(['/add'])
+        // this.router.navigate(['/add'])
+        console.log(data)
       } else {
         this.router.navigate(['/login'])
       }

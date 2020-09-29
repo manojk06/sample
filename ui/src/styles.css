@@ -96,8 +96,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   left: 0;
   margin-top: 100px;
   margin-left: 450px;
-  padding: 16px;
-  
+  width: auto;
+}
+.group{
+  display:flex ;
+  width:100%;
+  justify-content: space-between;
 }
 
   

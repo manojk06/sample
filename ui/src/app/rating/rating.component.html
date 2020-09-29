@@ -5,16 +5,16 @@
                 <h1>Hi {{appService.getStudent()}},</h1>
                 <h2>Give Your Food Ratings for {{duration}}</h2>
                 <div style="text-align: center;">
-                    <mat-radio-group aria-label="Select an option" [(ngModel)]="value">
-                        <mat-radio-button value="1">Bad</mat-radio-button>
+                    <mat-radio-group class="group" aria-label="Select an option" [(ngModel)]="value">
+                        <mat-radio-button value="1"><span style="color: crimson;">Bad</span></mat-radio-button>
                         <br>
-                        <mat-radio-button value="2">Average</mat-radio-button>
+                        <mat-radio-button value="2"><span style="color:blue;">Average</span></mat-radio-button>
                         <br>
-                        <mat-radio-button value="3">Ok</mat-radio-button>
+                        <mat-radio-button value="3"><span style="color:yellowgreen;">Ok</span></mat-radio-button>
                         <br>
-                        <mat-radio-button value="4">Good</mat-radio-button>
+                        <mat-radio-button value="4"><span style="color: green;">Good</span></mat-radio-button>
                         <br>
-                        <mat-radio-button value="5">Awesome</mat-radio-button>
+                        <mat-radio-button value="5"><span style="color:hotpink;">Super</span></mat-radio-button>
                         <br>
                     </mat-radio-group>
                 </div>
