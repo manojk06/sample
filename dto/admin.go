@@ -13,17 +13,23 @@ type Admin struct {
 }
 type Student struct {
 	Id       bson.ObjectId `bson:"_id,omitempty"`
-	Name     string        `json:"Name,omitempty", bson:"Name,omitempty"`
+	Name     string        `json:"name,omitempty", bson:"name,omitempty"`
 	RollNo   int           `json:"rollno,omitempty", bson:"rollno,omitempty"`
 	Password string        `json:"password"bson:"password"`
 	Hash     []byte        `json:"hash"bson:"hash"`
 }
 type Response struct {
-	RollNo    int    `json:"RollNo,omitempty", bson:"RollNo,omitempty"`
-	Name      string `json:"Name,omitempty", bson:"Name,omitempty"`
-	Time      string `json:"time,omitempty", bson:"time,omitempty"`
-	Value     int    `json:"value,omitempty", bson:"value,omitempty"`
-	BreakFast int    `json:"BreakFast,omitempty", bson:"BreakFast,omitempty"`
-	Lunch     int    `json:"Lunch,omitempty", bson:"Lunch,omitempty"`
-	Dinner    int    `json:"Dinner,omitempty", bson:"Dinner,omitempty"`
+	RollNo         int    `json:"rollno,omitempty", bson:"rollno,omitempty"`
+	Name           string `json:"name,omitempty", bson:"name,omitempty"`
+	Time           string `json:"time,omitempty", bson:"time,omitempty"`
+	Value          int    `json:"value,omitempty", bson:"value,omitempty"`
+	BreakFast      int    `json:"breakfast,omitempty", bson:"breakfast,omitempty"`
+	Lunch          int    `json:"lunch,omitempty", bson:"lunch,omitempty"`
+	Dinner         int    `json:"dinner,omitempty", bson:"dinner,omitempty"`
+	BreakFastToken int    `json:"breakfasttoken,omitempty",bson:"breakfasttoken,omitempty"`
+	LunchToken     int    `json:"lunchtoken,omitempty",bson:"lunchtoken,omitempty"`
+	DinnerToken    int    `json:"dinnertoken,omitempty",bson:"dinnertoken,omitempty"`
+}
+type Token struct {
+	TokenNo int `json:"token,omitempty",bson:"token,omitempty"`
 }

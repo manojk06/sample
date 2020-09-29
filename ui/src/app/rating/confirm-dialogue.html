@@ -7,7 +7,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="center">
-    <button mat-raised-button  color="primary" [mat-dialog-close]="true" cdkFocusInitial>Confirm</button>
+    <button mat-raised-button  color="primary" [mat-dialog-close]="data.result" cdkFocusInitial>Confirm</button>
     <button mat-raised-button color="accent" (click)="onNoClick()">Cancel</button>
    
   </mat-dialog-actions>

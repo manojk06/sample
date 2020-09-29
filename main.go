@@ -28,7 +28,7 @@ func main() {
 	config.Config()
 	DbConnect()
 	c := cron.New()
-	c.AddFunc("@every 2m", service.Sheduler)
+	c.AddFunc("@daily", service.Sheduler)
 	c.Start()
 	s := rpc.NewServer()
 	s.RegisterCodec(json.NewCodec(), "application/json")

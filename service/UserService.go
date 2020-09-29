@@ -120,22 +120,31 @@ func LoginStudent(args *dto.Student, reply *string) error {
 	return nil
 
 }
-func (f *UserService) FeedBack(r *http.Request, params *dto.Response, reply *string) error {
+func (f *UserService) FeedBack(r *http.Request, params *dto.Response, reply *int) error {
 	t := time.Now()
 	t1 := t.Hour()
 	log.Println("time is:", t1)
 	var err error
+	var token int
+
 	if t1 >= 12 && t1 <= 18 {
-		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"breakfast": params.BreakFast}})
+		token, err = TokenGenerate(t1, params)
+		log.Println("lunch Token is ", params.LunchToken)
+		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"breakfast": params.Value, "lunchtoken": params.LunchToken}})
+
 	} else if t1 >= 18 && t1 <= 23 {
-		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"lunch": params.Lunch}})
+		token, err = TokenGenerate(t1, params)
+		log.Println("dinner Token is ", params.DinnerToken)
+		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"lunch": params.Value, "dinnertoken": params.DinnerToken}})
 	} else if t1 >= 8 && t1 <= 12 {
-		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"dinner": params.Dinner}})
+		token, err = TokenGenerate(t1, params)
+		log.Println("BreakFast Token is ", params.BreakFastToken)
+		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"dinner": params.Value, "breakfasttoken": params.BreakFastToken}})
 	}
 	if err != nil {
 		log.Println("err to update:", err)
 	}
-
+	*reply = token
 	return nil
 
 }
@@ -151,9 +160,12 @@ func Sheduler() {
 	log.Println("cron called")
 	var std []dto.Student
 	var res dto.Response
+	var token dto.Token
 	time := time.Now()
 	day := time.Format("2006-January-02")
 	log.Println("today :", day)
+	token.TokenNo = 0
+	db.Insert(&token)
 	count, err := db.Count(&std)
 	if err != nil {
 		log.Println(err)
@@ -170,6 +182,9 @@ func Sheduler() {
 		res.BreakFast = 0
 		res.Lunch = 0
 		res.Dinner = 0
+		res.BreakFastToken = 0
+		res.LunchToken = 0
+		res.DinnerToken = 0
 		err := db.Insert(&res)
 		if err != nil {
 			log.Println(err)
@@ -177,4 +192,39 @@ func Sheduler() {
 	}
 	log.Println("table created")
 
+}
+func TokenGenerate(t1 int, params *dto.Response) (token int, err error) {
+	log.Println("TokenGenerate called ")
+	var Token dto.Token
+	db.Find(&Token, nil)
+	T := Token.TokenNo
+	log.Println(T)
+	Token.TokenNo = T + 1
+	if t1 >= 12 && t1 <= 18 {
+		log.Println("token generated for lunch")
+		params.LunchToken = Token.TokenNo
+		db.Update(&Token, bson.M{"tokenno": T}, bson.M{"$set": bson.M{"tokenno": Token.TokenNo}})
+		if err != nil {
+			return 0, err
+		}
+		return Token.TokenNo, nil
+	} else if t1 >= 18 && t1 <= 23 {
+		log.Println("token generated for dinner")
+		params.DinnerToken = Token.TokenNo
+		db.Update(&Token, bson.M{"token": T}, bson.M{"$set": bson.M{"token": Token.TokenNo}})
+		if err != nil {
+			return 0, err
+		}
+		return Token.TokenNo, nil
+	} else if t1 >= 8 && t1 <= 12 {
+		log.Println("token generated for BreakFast")
+		params.BreakFastToken = Token.TokenNo
+		db.Update(&Token, bson.M{"token": T}, bson.M{"$set": bson.M{"token": Token.TokenNo}})
+		if err != nil {
+			return 0, err
+		}
+		return Token.TokenNo, nil
+	}
+
+	return 0, nil
 }

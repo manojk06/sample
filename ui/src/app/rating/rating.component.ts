@@ -4,6 +4,7 @@ import { DatePipe } from '@angular/common';
 import { AppService } from '../app.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class RatingComponent implements OnInit {
     value: any;
     yesterday: any;
     rollno: any;
-    constructor(private datePipe: DatePipe, public toaster: ToastrService, public appService: AppService, private dialog: MatDialog) {
+    constructor(private datePipe: DatePipe, public router:HttpClient,public toaster: ToastrService, public appService: AppService, private dialog: MatDialog) {
 
 
     }
@@ -68,9 +69,11 @@ export class RatingComponent implements OnInit {
             );
             dialogRef.afterClosed().subscribe(result => {
                 if (result) {
+                    console.log(result)
                     let obj = { "id": 1, "method": "UserService.FeedBack", "params": [{ "rollno": this.rollno, "time": this.date, "value": result }] };
                     this.appService.getPost(obj).subscribe(data => {
                         console.log(data)
+                        
                     })
                 }
             });
