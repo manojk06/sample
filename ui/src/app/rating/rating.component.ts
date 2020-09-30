@@ -81,7 +81,7 @@ export class RatingComponent implements OnInit {
                 }
             });
         } else {
-            this.toaster.warning("Give ratting")
+            this.appService.addWarnMsg("give the warning")
         }
     }
 }

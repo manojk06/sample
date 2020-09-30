@@ -165,6 +165,7 @@ func Sheduler() {
 	day := time.Format("2006-January-02")
 	log.Println("today :", day)
 	token.TokenNo = 0
+	token.Date = day
 	db.Insert(&token)
 	count, err := db.Count(&std)
 	if err != nil {
@@ -193,13 +194,15 @@ func Sheduler() {
 func TokenGenerate(t1 int, params *dto.Response) (token int, err error) {
 	log.Println("TokenGenerate called ")
 	var Token dto.Token
+	time := time.Now()
+	day := time.Format("2006-January-02")
 	db.Find(&Token, nil)
 	T := Token.TokenNo
 	log.Println(T)
 	Token.TokenNo = T + 1
 	if t1 >= 12 && t1 < 15 {
 		log.Println("token generated for lunch")
-		db.Update(&Token, bson.M{"tokenno": T}, bson.M{"$set": bson.M{"tokenno": Token.TokenNo}})
+		db.Update(&Token, bson.M{"date": day}, bson.M{"$set": bson.M{"tokenno": Token.TokenNo}})
 		if err != nil {
 			return 0, err
 		}
@@ -207,7 +210,7 @@ func TokenGenerate(t1 int, params *dto.Response) (token int, err error) {
 	} else if t1 >= 20 && t1 < 22 {
 		log.Println("token generated for dinner")
 
-		db.Update(&Token, bson.M{"tokenno": T}, bson.M{"$set": bson.M{"tokenno": Token.TokenNo}})
+		db.Update(&Token, bson.M{"date": day}, bson.M{"$set": bson.M{"tokenno": Token.TokenNo}})
 		if err != nil {
 			return 0, err
 		}
@@ -215,7 +218,7 @@ func TokenGenerate(t1 int, params *dto.Response) (token int, err error) {
 	} else if t1 >= 8 && t1 < 10 {
 		log.Println("token generated for BreakFast")
 
-		db.Update(&Token, bson.M{"tokenno": T}, bson.M{"$set": bson.M{"tokenno": Token.TokenNo}})
+		db.Update(&Token, bson.M{"date": day}, bson.M{"$set": bson.M{"tokenno": Token.TokenNo}})
 		if err != nil {
 			return 0, err
 		}

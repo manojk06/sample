@@ -28,5 +28,6 @@ type Response struct {
 	Dinner    int    `json:"dinner,omitempty", bson:"dinner,omitempty"`
 }
 type Token struct {
-	TokenNo int `json:"token,omitempty",bson:"token,omitempty"`
+	TokenNo int    `json:"token,omitempty",bson:"token,omitempty"`
+	Date    string `json:"date,omitempty",bson:"date,omitempty"`
 }

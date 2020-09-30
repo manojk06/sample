@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
 
     },(error)=>{
       console.log(error)
-      this.toaster.error("Invalid creditial")
+      this.appService.addErrorMsg("invalid Creditial")
     })
 
   }
