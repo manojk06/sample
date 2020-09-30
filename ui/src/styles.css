@@ -61,12 +61,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin-top: 80px;
     margin-left: 150px;
     position: absolute;
-  }
-  th.mat-header-cell{
+  } 
+   th.mat-header-cell{
      background-color: indianred;
      font-size: 25px;
      font-weight: bold;
      font-style: italic;
+     width: 80%;
+     padding: 20px 20px 20px 20px !important;
+     
   }
   .table thead th{
     vertical-align: revert;
@@ -76,12 +79,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .table th{
   border-top: 0px;
-}
-.button{
-  right: 20px;
-  top: 30px !important;
+} 
+ .button{
+  right: 40px;
+  top: 40px !important;
   position: absolute;
-  color: lawngreen;
+  color: blue;
 }
 .container2 {
   position: absolute;
@@ -96,12 +99,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   left: 0;
   margin-top: 100px;
   margin-left: 450px;
-  width: auto;
 }
 .group{
   display:flex ;
   width:100%;
   justify-content: space-between;
 }
-
+.container-4 {
+  position: absolute;
+  left: 0;
+  margin-top: 60px;
+  margin-left: 450px;
+  width: 350px;
+  background-color:rgb(150, 80,80);
+  text-align: center;
+  padding: 20px;
+  
+}
   

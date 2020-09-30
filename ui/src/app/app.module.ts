@@ -12,6 +12,8 @@ import {ToastrModule} from'ngx-toastr';
 import {RatingComponent, ConfirmDialogComponent} from './rating/rating.component'
 import { DatePipe } from '@angular/common';
 import { TokenComponent } from './token/token.component';
+import { AdminComponent } from './admin/admin.component';
+import { AddadminComponent } from './addadmin/addadmin.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { TokenComponent } from './token/token.component';
     RatingComponent,
     ConfirmDialogComponent,
     TokenComponent,
+    AdminComponent,
+    AddadminComponent
     
   ],
   imports: [

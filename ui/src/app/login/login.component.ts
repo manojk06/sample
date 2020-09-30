@@ -29,13 +29,9 @@ export class LoginComponent implements OnInit {
     this.obj = { "username": this.email, "password": this.password }
 
     this.http.post<any>('/login', this.obj).subscribe(data => {
-      // localStorage.setItem('data',data)
-      console.log(data)
       localStorage.setItem('role', data)
-
       if (data == 'Login successfully') {
-        // this.router.navigate(['/add'])
-        console.log(data)
+        this.router.navigate(['/admin'])
       } else {
         this.router.navigate(['/login'])
       }

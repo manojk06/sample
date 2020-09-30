@@ -5,18 +5,21 @@ import (
 )
 
 type Admin struct {
-	Id       bson.ObjectId `json:"id"bson:"_id"`
-	Username string        `json:"username"bson:"username"`
-	Password string        `json:"password"bson:"password"`
-	Hash     []byte        `json:"hash"bson:"hash"`
-	Role     string        `json:"role"bson:"role"`
+	Id            bson.ObjectId `json:"id"bson:"_id"`
+	Username      string        `json:"username"bson:"username"`
+	Password      string        `json:"password"bson:"password"`
+	Hash          []byte        `json:"hash"bson:"hash"`
+	Role          string        `json:"role"bson:"role"`
+	Name          string        `json:"name"bson:"name"`
+	ContactNumber string        `json:"contactnumber"bson:"contactnumber"`
 }
 type Student struct {
-	Id       bson.ObjectId `bson:"_id,omitempty"`
-	Name     string        `json:"name,omitempty", bson:"name,omitempty"`
-	RollNo   int           `json:"rollno,omitempty", bson:"rollno,omitempty"`
-	Password string        `json:"password"bson:"password"`
-	Hash     []byte        `json:"hash"bson:"hash"`
+	Id            bson.ObjectId `bson:"_id,omitempty"`
+	Name          string        `json:"name,omitempty", bson:"name,omitempty"`
+	RollNo        int           `json:"rollno,omitempty", bson:"rollno,omitempty"`
+	Password      string        `json:"password"bson:"password"`
+	Hash          []byte        `json:"hash"bson:"hash"`
+	ContactNumber string        `json:"contactnumber"bson:"contactnumber"`
 }
 type Response struct {
 	RollNo    int    `json:"rollno,omitempty", bson:"rollno,omitempty"`

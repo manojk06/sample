@@ -42,7 +42,7 @@ func (f *UserService) AddStudent(r *http.Request, student *dto.Student, reply *s
 	return nil
 }
 func (f *UserService) GetAdmin(r *http.Request, admin *dto.Admin, reply *[]dto.Admin) error {
-	err := db.Find(&reply, nil)
+	err := db.Find(reply, nil)
 	if err != nil {
 		return err
 	}
@@ -50,7 +50,7 @@ func (f *UserService) GetAdmin(r *http.Request, admin *dto.Admin, reply *[]dto.A
 
 }
 func (f *UserService) GetStudent(r *http.Request, admin *dto.Student, reply *[]dto.Student) error {
-	err := db.Find(&reply, nil)
+	err := db.Find(reply, nil)
 	if err != nil {
 		return err
 	}
