@@ -1,6 +1,8 @@
 package dto
 
 import (
+	"time"
+
 	"github.com/globalsign/mgo/bson"
 )
 
@@ -21,6 +23,7 @@ type Student struct {
 	Hash          []byte        `json:"hash"bson:"hash"`
 	ContactNumber string        `json:"contactnumber"bson:"contactnumber"`
 	Dob           string        `json:"dob"bson:"dob"`
+	JoiningDate   time.Time     `json:"joiningdate"bson:"joiningdate"`
 }
 type Response struct {
 	RollNo    int    `json:"rollno,omitempty", bson:"rollno,omitempty"`

@@ -9,7 +9,7 @@
 </mat-form-field><br>
 <i class='fas fa-lock' style="font-size: 24px;color: white;"></i>&nbsp;&nbsp;&nbsp;
 <mat-form-field style="width: 200px;color: white;">
-  <input type="password" matInput [(ngModel)]="password" placeholder="enter password" name="password" required>
+  <input type="password" matInput [(ngModel)]="password" placeholder="enter password" name="password" minlength="8" maxlength="20" required>
 </mat-form-field>
 <br><br>
 <button class="btn" mat-raised-button   [disabled]="admin.invalid" (click)="submit()">Login</button>
@@ -24,7 +24,7 @@
 </mat-form-field><br>
 <i class='fas fa-lock' style="font-size: 24px;color: white;"></i>&nbsp;&nbsp;&nbsp;
 <mat-form-field style="width: 200px;color: white;">
-<input type="password" matInput [(ngModel)]="password1" placeholder="enter password" name="password" required>
+<input type="password" matInput [(ngModel)]="password1" placeholder="enter password" name="password" minlength="8" maxlength="20" required>
 </mat-form-field>
 <br><br>
 <button class="btn" mat-raised-button  [disabled]="student.invalid" (click)="submit1()">Login</button>

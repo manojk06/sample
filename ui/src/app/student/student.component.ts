@@ -10,7 +10,7 @@ import { AppService } from '../app.service';
 })
 export class StudentComponent implements OnInit {
   dataSource= new MatTableDataSource<any>();
-  displayedColumns: string[] = ['RollNo','Name', 'Dob','ContactNumber'];
+  displayedColumns: string[] = ['RollNo','Name', 'Dob','ContactNumber','Joining Date'];
 @ViewChild(MatPaginator) paginator:MatPaginator;
   constructor(private appService:AppService) { }
 

@@ -20,6 +20,7 @@ type UserService struct {
 func (f *UserService) AddStudent(r *http.Request, student *dto.Student, reply *string) error {
 	student.Id = bson.NewObjectId()
 	pass := []byte(student.Password)
+	student.JoiningDate = time.Now()
 	student.Password = ""
 	Password, err := bcrypt.GenerateFromPassword(pass, bcrypt.DefaultCost)
 	if err != nil {
