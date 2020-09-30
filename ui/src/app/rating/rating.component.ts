@@ -5,6 +5,7 @@ import { AppService } from '../app.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class RatingComponent implements OnInit {
     value: any;
     yesterday: any;
     rollno: any;
-    constructor(private datePipe: DatePipe, public router:HttpClient,public toaster: ToastrService, public appService: AppService, private dialog: MatDialog) {
+    constructor(private datePipe: DatePipe, public router:Router,public toaster: ToastrService, public appService: AppService, private dialog: MatDialog) {
 
 
     }
@@ -40,14 +41,14 @@ export class RatingComponent implements OnInit {
         this.interval();
     }
     interval() {
-        if (this.t1 >= 12 && this.t1 <= 18) {
+        if (this.t1 >= 12 && this.t1 < 15) {
             this.duration = "Today Breakfast"
 
-        } else if (this.t1 >= 18 && this.t1 <= 23) {
+        } else if (this.t1 >= 20 && this.t1 <22) {
             this.duration = "Today Lunch"
 
 
-        } else if (this.t1 >= 8 && this.t1 < 12) {
+        } else if (this.t1 >= 8 && this.t1 < 10) {
             this.duration = "Yesterday Dinner"
 
         }
@@ -55,7 +56,7 @@ export class RatingComponent implements OnInit {
     feedback() {
         if (this.value !== undefined) {
             console.log(this.rollno)
-            if (this.t1 >= 8 && this.t1 < 12) {
+            if (this.t1 >= 8 && this.t1 < 10) {
                 this.yesterday = new Date(this.time.setDate(this.time.getDate() - 1))
                 this.date = this.datePipe.transform(this.yesterday, "y-MMMM-d")
                 console.log("for dinner feedback date", this.date)
@@ -72,8 +73,10 @@ export class RatingComponent implements OnInit {
                     console.log(result)
                     let obj = { "id": 1, "method": "UserService.FeedBack", "params": [{ "rollno": this.rollno, "time": this.date, "value": result }] };
                     this.appService.getPost(obj).subscribe(data => {
-                        console.log(data)
-                        
+                        console.log(data.result)
+                        let token=String(data.result)
+                        this.appService.setToken(token)
+                        this.router.navigate(['/token'])
                     })
                 }
             });

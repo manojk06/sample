@@ -127,22 +127,22 @@ func (f *UserService) FeedBack(r *http.Request, params *dto.Response, reply *int
 	var err error
 	var token int
 
-	if t1 >= 12 && t1 <= 18 {
+	if t1 >= 12 && t1 < 15 {
 		token, err = TokenGenerate(t1, params)
-		log.Println("lunch Token is ", params.LunchToken)
-		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"breakfast": params.Value, "lunchtoken": params.LunchToken}})
-
-	} else if t1 >= 18 && t1 <= 23 {
+		log.Println("lunch Token is ", token)
+		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"breakfast": params.Value}})
+	} else if t1 >= 20 && t1 < 22 {
 		token, err = TokenGenerate(t1, params)
-		log.Println("dinner Token is ", params.DinnerToken)
-		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"lunch": params.Value, "dinnertoken": params.DinnerToken}})
-	} else if t1 >= 8 && t1 <= 12 {
+		log.Println("dinner Token is ", token)
+		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"lunch": params.Value}})
+	} else if t1 >= 8 && t1 < 10 {
 		token, err = TokenGenerate(t1, params)
-		log.Println("BreakFast Token is ", params.BreakFastToken)
-		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"dinner": params.Value, "breakfasttoken": params.BreakFastToken}})
+		log.Println("BreakFast Token is ", token)
+		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"dinner": params.Value}})
 	}
 	if err != nil {
-		log.Println("err to update:", err)
+		log.Println(" err in update :", err)
+		return err
 	}
 	*reply = token
 	return nil
@@ -182,9 +182,6 @@ func Sheduler() {
 		res.BreakFast = 0
 		res.Lunch = 0
 		res.Dinner = 0
-		res.BreakFastToken = 0
-		res.LunchToken = 0
-		res.DinnerToken = 0
 		err := db.Insert(&res)
 		if err != nil {
 			log.Println(err)
@@ -200,26 +197,25 @@ func TokenGenerate(t1 int, params *dto.Response) (token int, err error) {
 	T := Token.TokenNo
 	log.Println(T)
 	Token.TokenNo = T + 1
-	if t1 >= 12 && t1 <= 18 {
+	if t1 >= 12 && t1 < 15 {
 		log.Println("token generated for lunch")
-		params.LunchToken = Token.TokenNo
 		db.Update(&Token, bson.M{"tokenno": T}, bson.M{"$set": bson.M{"tokenno": Token.TokenNo}})
 		if err != nil {
 			return 0, err
 		}
 		return Token.TokenNo, nil
-	} else if t1 >= 18 && t1 <= 23 {
+	} else if t1 >= 20 && t1 < 22 {
 		log.Println("token generated for dinner")
-		params.DinnerToken = Token.TokenNo
-		db.Update(&Token, bson.M{"token": T}, bson.M{"$set": bson.M{"token": Token.TokenNo}})
+
+		db.Update(&Token, bson.M{"tokenno": T}, bson.M{"$set": bson.M{"tokenno": Token.TokenNo}})
 		if err != nil {
 			return 0, err
 		}
 		return Token.TokenNo, nil
-	} else if t1 >= 8 && t1 <= 12 {
+	} else if t1 >= 8 && t1 < 10 {
 		log.Println("token generated for BreakFast")
-		params.BreakFastToken = Token.TokenNo
-		db.Update(&Token, bson.M{"token": T}, bson.M{"$set": bson.M{"token": Token.TokenNo}})
+
+		db.Update(&Token, bson.M{"tokenno": T}, bson.M{"$set": bson.M{"tokenno": Token.TokenNo}})
 		if err != nil {
 			return 0, err
 		}

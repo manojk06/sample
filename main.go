@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"time"
 
 	"golang.org/x/crypto/bcrypt"
 
@@ -96,17 +97,30 @@ func Login(w http.ResponseWriter, r *http.Request) {
 func LoginStudent(w http.ResponseWriter, r *http.Request) {
 	log.Println("loginstudent called....")
 	var std dto.Student
+	var res dto.Response
+	var reply string
 	body, _ := ioutil.ReadAll(r.Body)
 	err := j.Unmarshal(body, &std)
 	if err != nil {
 		log.Println("unmarshal error", err)
 	}
-	var reply string
-	err1 := service.LoginStudent(&std, &reply)
-	if err1 != nil {
-		http.Error(w, "Invalid credential", 401)
+	log.Println(std.RollNo)
+	time := time.Now()
+	day := time.Format("2006-January-02")
+	db.Find(&res, bson.M{"rollno": std.RollNo, "time": day})
+	log.Println(res)
+	t1 := time.Hour()
+	log.Println(t1)
+	log.Println(res.Lunch)
+	if t1 >= 12 && t1 < 15 && res.BreakFast == 0 || t1 >= 20 && t1 < 22 && res.Lunch == 0 || t1 >= 8 && t1 < 10 && res.Dinner == 0 {
+		err1 := service.LoginStudent(&std, &reply)
+		if err1 != nil {
+			http.Error(w, "Invalid credential", 401)
+		} else {
+			j.NewEncoder(w).Encode(reply)
+		}
 	} else {
-		j.NewEncoder(w).Encode(reply)
+		http.Error(w, "Already Token sent", 401)
 	}
 
 }

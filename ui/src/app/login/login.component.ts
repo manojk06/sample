@@ -3,6 +3,7 @@ import { Router, Routes } from '@angular/router';
 import { MapsAPILoader } from '@agm/core';
 import { HttpClient } from '@angular/common/http';
 import { AppService } from '../app.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
   password1: any
   obj: {}
 
-  constructor(public router: Router, private http: HttpClient, public appService: AppService) { }
+  constructor(public router: Router, private http: HttpClient, public toaster: ToastrService, public appService: AppService) { }
 
   ngOnInit(): void {
 
@@ -48,15 +49,20 @@ export class LoginComponent implements OnInit {
     this.obj = { "rollno": this.rollNo, "password": this.password1 }
 
     this.http.post<any>('/loginstudent', this.obj).subscribe(data => {
-      console.log(data)
-      this.appService.setStudent(data)
-      this.appService.setRollNo(this.rollNo)
+     
       if (data) {
+        console.log(data)
+        this.appService.setStudent(data)
+        this.appService.setRollNo(this.rollNo)
         this.router.navigate(['/ratings'])
       } else {
+        
         this.router.navigate(['/login'])
       }
 
+    },(error)=>{
+      console.log(error)
+      this.toaster.error("Invalid creditial")
     })
 
   }

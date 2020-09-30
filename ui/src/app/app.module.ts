@@ -11,6 +11,7 @@ import { InterInterceptor } from './inter.interceptor';
 import {ToastrModule} from'ngx-toastr';
 import {RatingComponent, ConfirmDialogComponent} from './rating/rating.component'
 import { DatePipe } from '@angular/common';
+import { TokenComponent } from './token/token.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { DatePipe } from '@angular/common';
     LoginComponent,
     RatingComponent,
     ConfirmDialogComponent,
+    TokenComponent,
     
   ],
   imports: [
