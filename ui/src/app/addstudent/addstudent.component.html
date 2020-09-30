@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+ <div class="background1">
+    <div class="container-4">
+        <form #add="ngForm" autocomplete="off">
+           <br> <h1 style="color:white;">Add Student-<i class="fas fa-user-graduate"></i></h1><br>
+           <i class="fas fa-user-tie" style="color:white;font-size: 30px;"></i>&nbsp;&nbsp;
+            <mat-form-field style="color: white;">
+                <input type="text" matInput [(ngModel)]="name" placeholder="enter name" name="name" minlength="3" maxlength="20" required>
+            </mat-form-field><br>
+            <i class="fas fa-user-circle" style="color:white;font-size: 30px;"></i>&nbsp;&nbsp;
+            <mat-form-field style="color: white;">
+                <input type="number" matInput [(ngModel)]="rollno" placeholder="enter rollno"  name="rollno" required>
+            </mat-form-field><br>     
+         <i class="fas fa-lock" style="color:white;font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;   
+              <mat-form-field style="color: white;">
+                <input matInput placeholder="enter Password" [type]="hide ? 'text' : 'password'" [(ngModel)]="password" name="password" minlength="8" maxlength="20"  required>
+            <mat-icon matSuffix (click)="change()">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            </mat-form-field><br> 
+            <i class="fas fa-calendar-alt" style="color:white;font-size: 30px;"></i>&nbsp;&nbsp;&nbsp; 
+            <mat-form-field color="accent" appearance="fill">
+                <input matInput [matDatepicker]="picker1" [(ngModel)]="dob" name="date" placeholder="enter birthdate">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field><br>
+            <i class="fa fa-whatsapp" style="color:white;font-size: 30px;"></i>&nbsp;&nbsp;
+            <a style="color: white;">+91-</a>&nbsp;
+            <mat-form-field style="color: white;">
+                <input type="text" matInput  [(ngModel)]= "contactnumber" (keypress)="keyPress($event)" placeholder="enter mobilenumber" name="contactnumber" minlength="10" maxlength="10" 
+                    required>
+            </mat-form-field>
+            <br><br>
+            <button class="btn" mat-raised-button [disabled]="add.invalid" (click)="submit()">Submit</button>
+        </form>
+    </div> 
+
+</div>   

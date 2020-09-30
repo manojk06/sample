@@ -76,19 +76,6 @@ func DbConnect() {
 		ad.ContactNumber = "9002654872"
 		db.Insert(ad)
 	}
-	count1, _ := db.Count(&student)
-	if count1 == 0 {
-		ad := &dto.Student{}
-		ad.Id = bson.NewObjectId()
-		ad.Password = ""
-		Hash, _ := bcrypt.GenerateFromPassword([]byte("Test@1234"), 5)
-		ad.Hash = Hash
-		ad.Name = "Manoj"
-		ad.ContactNumber = "9002654872"
-		ad.RollNo = 1
-		db.Insert(ad)
-	}
-
 }
 func Login(w http.ResponseWriter, r *http.Request) {
 	log.Println("login called....")

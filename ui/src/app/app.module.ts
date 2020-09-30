@@ -14,6 +14,8 @@ import { DatePipe } from '@angular/common';
 import { TokenComponent } from './token/token.component';
 import { AdminComponent } from './admin/admin.component';
 import { AddadminComponent } from './addadmin/addadmin.component';
+import { StudentComponent } from './student/student.component';
+import { AddstudentComponent } from './addstudent/addstudent.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { AddadminComponent } from './addadmin/addadmin.component';
     ConfirmDialogComponent,
     TokenComponent,
     AdminComponent,
-    AddadminComponent
+    AddadminComponent,
+    StudentComponent,
+    AddstudentComponent
     
   ],
   imports: [

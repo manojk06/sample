@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="background1">
+    <div class="container-4">
+        <form #add="ngForm" autocomplete="off">
+           <br> <h1 style="color:white;">Add Admin-<i class="fas fa-user"></i></h1><br>
+           <i class="fas fa-user-tie" style="color:white;font-size: 30px;"></i>&nbsp;&nbsp;
+            <mat-form-field style="color: white;">
+                <input type="text" matInput [(ngModel)]="name" placeholder="enter name" name="name" minlength="3" maxlength="20" required>
+            </mat-form-field><br>
+            <!-- <span *ngIf="add.invalid">
+            <h5 style="color: white;">name should minimun 3char  and maximim 20 char </h5><br></span> -->
+            <i class="fas fa-user-circle" style="color:white;font-size: 30px;"></i>&nbsp;&nbsp;
+            <mat-form-field style="color: white;">
+                <input  matInput [(ngModel)]="username" placeholder="enter username" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" name="email" required>
+            </mat-form-field><br>
+            <!-- <h5 style="color: white;">Ex:example@gmail.com</h5><br> -->
+            <i class="fas fa-lock" style="color:white;font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;
+            <mat-form-field style="color: white;">
+                <input matInput placeholder="enter Password" [type]="hide ? 'text' : 'password'" [(ngModel)]="password" name="password" minlength="8" maxlength="20"  required>
+            <mat-icon matSuffix (click)="change()">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            </mat-form-field><br>
+            <!-- <h5 style="color: white;">At least 8 characters in length,Lowercase letters,Uppercase letters,Numbers,Special characters</h5><br> -->
+            <i class="far fa-smile" style="color:white;font-size: 30px;"></i>&nbsp;&nbsp;
+            <mat-form-field style="color: white;">
+                <input matInput [(ngModel)]="role" placeholder="enter Role" name="role" required>
+            </mat-form-field><br>
+            <i class="fa fa-whatsapp" style="color:white;font-size: 30px;"></i>&nbsp;&nbsp;
+            <a style="color: white;">+91-</a>&nbsp;
+            <mat-form-field style="color: white;">
+                <input type="text" matInput  [(ngModel)]= "contactnumber" (keypress)="keyPress($event)" placeholder="enter mobilenumber" name="contactnumber" minlength="10" maxlength="10" 
+                    required>
+            </mat-form-field>
+            <br><br>
+            <button class="btn" mat-raised-button [disabled]="add.invalid" (click)="submit()">Submit</button>
+        </form>
+    </div>
+
+</div>

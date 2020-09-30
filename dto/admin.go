@@ -20,6 +20,7 @@ type Student struct {
 	Password      string        `json:"password"bson:"password"`
 	Hash          []byte        `json:"hash"bson:"hash"`
 	ContactNumber string        `json:"contactnumber"bson:"contactnumber"`
+	Dob           string        `json:"dob"bson:"dob"`
 }
 type Response struct {
 	RollNo    int    `json:"rollno,omitempty", bson:"rollno,omitempty"`
