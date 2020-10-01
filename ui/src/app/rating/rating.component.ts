@@ -33,7 +33,7 @@ export class RatingComponent implements OnInit {
         this.now = this.time.toString().split(' ')[4];
         let a = this.now.split(':')[0]
         this.t1 = Number(a)
-        this.date = this.datePipe.transform(this.time, "y-MMMM-d")
+        this.date = this.datePipe.transform(this.time, "y-MMMM-dd")
         console.log(this.t1)
         console.log(this.date)
         console.log(this.now)
@@ -58,7 +58,7 @@ export class RatingComponent implements OnInit {
             console.log(this.rollno)
             if (this.t1 >= 8 && this.t1 < 10) {
                 this.yesterday = new Date(this.time.setDate(this.time.getDate() - 1))
-                this.date = this.datePipe.transform(this.yesterday, "y-MMMM-d")
+                this.date = this.datePipe.transform(this.yesterday, "y-MMMM-dd")
                 console.log("for dinner feedback date", this.date)
 
             }
