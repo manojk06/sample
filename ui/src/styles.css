@@ -63,7 +63,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     position: absolute;
   } 
    th.mat-header-cell{
-     background-color: indianred;
+     background-color: mediumseagreen;
      font-size: 25px;
      font-weight: bold;
      font-style: italic;
