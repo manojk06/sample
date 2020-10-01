@@ -107,7 +107,8 @@ func LoginStudent(args *dto.Student, reply *string) error {
 	}
 	log.Println(args.Dob)
 	if args.Dob == result.Dob {
-		*reply = args.Name
+		log.Println(args.Name)
+		*reply = result.Name
 	} else {
 		log.Println("error in validation  :", err)
 		return fmt.Errorf("invalid creditional")
