@@ -19,16 +19,11 @@ type UserService struct {
 
 func (f *UserService) AddStudent(r *http.Request, student *dto.Student, reply *string) error {
 	student.Id = bson.NewObjectId()
-	pass := []byte(student.Password)
-	student.JoiningDate = time.Now()
-	student.Password = ""
-	Password, err := bcrypt.GenerateFromPassword(pass, bcrypt.DefaultCost)
-	if err != nil {
-		log.Println("bycrpt error :", err)
-		return err
-	}
-	student.Hash = Password
-	err = db.Insert(student)
+	time := time.Now()
+	date := time.Format("2006-January-02")
+	student.JoiningDate = date
+	log.Println(student.Dob)
+	err := db.Insert(&student)
 	if err != nil {
 		log.Println("add student error:", err)
 		if strings.Contains(err.Error(), "duplicate key error collection") {
@@ -110,14 +105,13 @@ func LoginStudent(args *dto.Student, reply *string) error {
 			return fmt.Errorf("invalid creditional")
 		}
 	}
-	err = bcrypt.CompareHashAndPassword(result.Hash, []byte(args.Password))
-	if err == nil {
-		*reply = result.Name
+	log.Println(args.Dob)
+	if args.Dob == result.Dob {
+		*reply = args.Name
 	} else {
 		log.Println("error in validation  :", err)
 		return fmt.Errorf("invalid creditional")
 	}
-
 	return nil
 
 }
@@ -127,15 +121,18 @@ func (f *UserService) FeedBack(r *http.Request, params *dto.Response, reply *int
 	log.Println("time is:", t1)
 	var err error
 	var token int
-
 	if t1 >= 12 && t1 < 15 {
 		token, err = TokenGenerate(t1, params)
 		log.Println("lunch Token is ", token)
 		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"breakfast": params.Value}})
+		if err != nil {
+			log.Println(" err in update :", err)
+			return err
+		}
 	} else if t1 >= 20 && t1 < 22 {
 		token, err = TokenGenerate(t1, params)
 		log.Println("dinner Token is ", token)
-		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"lunch": params.Value}})
+		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": "2020-October-1"}, bson.M{"$set": bson.M{"lunch": params.Value}})
 	} else if t1 >= 8 && t1 < 10 {
 		token, err = TokenGenerate(t1, params)
 		log.Println("BreakFast Token is ", token)

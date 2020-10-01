@@ -10,7 +10,7 @@ import { AppService } from '../app.service';
 })
 export class AddstudentComponent implements OnInit {
   rollno:number;
-  password:any;
+ 
   contactnumber:any;
   dob:any;
   name:string;
@@ -24,7 +24,7 @@ export class AddstudentComponent implements OnInit {
     let obj = {
       "jsonrpc": "2.0",
       "method": "UserService.AddStudent",
-      "params": [{"name":this.name,"rollno":this.rollno,"password":this.password,"dob":date,"contactnumber":this.contactnumber}],
+      "params": [{"name":this.name,"rollno":this.rollno,"dob":date,"contactnumber":this.contactnumber}],
       "id": 1
     }
     this.appService.getPost(obj).subscribe(data =>{

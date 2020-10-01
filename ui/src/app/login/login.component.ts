@@ -4,7 +4,7 @@ import { MapsAPILoader } from '@agm/core';
 import { HttpClient } from '@angular/common/http';
 import { AppService } from '../app.service';
 import { ToastrService } from 'ngx-toastr';
-
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -16,10 +16,10 @@ export class LoginComponent implements OnInit {
   email: any
   password: any
   rollNo: number
-  password1: any
+  dob: any
   obj: {}
 
-  constructor(public router: Router, private http: HttpClient, public toaster: ToastrService, public appService: AppService) { }
+  constructor(public router: Router, private http: HttpClient, private datePipe: DatePipe, public appService: AppService) { }
 
   ngOnInit(): void {
 
@@ -40,9 +40,10 @@ export class LoginComponent implements OnInit {
 
   }
   submit1() {
+    let date=this.datePipe.transform(this.dob, "yyyy-MM-dd")
     let roll = this.rollNo.toString()
     localStorage.setItem('rollNo', roll)
-    this.obj = { "rollno": this.rollNo, "password": this.password1 }
+    this.obj = { "rollno": this.rollNo, "dob": date }
 
     this.http.post<any>('/loginstudent', this.obj).subscribe(data => {
      

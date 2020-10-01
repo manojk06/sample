@@ -12,11 +12,6 @@
             <mat-form-field style="color: white;">
                 <input type="number" matInput [(ngModel)]="rollno" placeholder="enter rollno"  name="rollno" required>
             </mat-form-field><br>     
-         <i class="fas fa-lock" style="color:white;font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;   
-              <mat-form-field style="color: white;">
-                <input matInput placeholder="enter Password" [type]="hide ? 'text' : 'password'" [(ngModel)]="password" name="password" minlength="8" maxlength="20"  required>
-            <mat-icon matSuffix (click)="change()">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-            </mat-form-field><br> 
             <i class="fas fa-calendar-alt" style="color:white;font-size: 30px;"></i>&nbsp;&nbsp;&nbsp; 
             <mat-form-field color="accent" appearance="fill">
                 <input matInput [matDatepicker]="picker1" [(ngModel)]="dob" name="date" placeholder="enter birthdate">
