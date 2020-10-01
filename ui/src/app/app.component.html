@@ -4,11 +4,11 @@
       <span class="time">{{ time | date:'medium' }}</span>&nbsp;&nbsp;
       <span style="flex: 1 1 auto;"></span>
  <span *ngIf="(choose!='/login')&&(choose!='/')">
-  <a style="text-decoration: none;color: floralwhite;"  *ngIf="(service.getrollNo())">{{service.getrollNo()}}</a>&nbsp; 
+  <a style="text-decoration: none;color: floralwhite;"  *ngIf="(service.getrollNo() && service.getrole()!='Login successfully')">{{service.getrollNo()}}</a>&nbsp; 
 <a style="text-decoration: none;color: floralwhite;"  *ngIf="(service.getrole() =='Login successfully')" [routerLink]="['student']" >Student</a>&nbsp;
 <a style="text-decoration: none;color: floralwhite;" *ngIf="(service.getrole() =='Login successfully')" [routerLink]="['admin']">Admin</a>&nbsp;
 <a style="text-decoration: none;color: floralwhite;cursor: pointer;"*ngIf="(service.getrole() =='Login successfully')"  [matMenuTriggerFor]="menu">{{service.getmail()}} <i class='fas fa-arrow-circle-down'></i></a>
-<a style="text-decoration: none;color: floralwhite;cursor: pointer;"*ngIf="(service.getName())"  [matMenuTriggerFor]="menu">{{service.getName()}} <i class='fas fa-arrow-circle-down'></i></a>
+<a style="text-decoration: none;color: floralwhite;cursor: pointer;"*ngIf="(service.getName() && service.getrole()!='Login successfully')"  [matMenuTriggerFor]="menu">{{service.getName()}} <i class='fas fa-arrow-circle-down'></i></a>
 </span>
 <mat-menu #menu="matMenu" xPosition="before">
   <button mat-menu-item (click)="logout()"> Logout </button>
