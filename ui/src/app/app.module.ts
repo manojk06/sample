@@ -16,6 +16,9 @@ import { AdminComponent } from './admin/admin.component';
 import { AddadminComponent } from './addadmin/addadmin.component';
 import { StudentComponent } from './student/student.component';
 import { AddstudentComponent } from './addstudent/addstudent.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import {MustMatchDirective} from './mustMatch.directive';
+
 
 @NgModule({
   declarations: [
@@ -27,8 +30,9 @@ import { AddstudentComponent } from './addstudent/addstudent.component';
     AdminComponent,
     AddadminComponent,
     StudentComponent,
-    AddstudentComponent
-    
+    AddstudentComponent,
+    ChangePasswordComponent, 
+    MustMatchDirective,
   ],
   imports: [
     AppRoutingModule,

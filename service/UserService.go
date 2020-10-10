@@ -1,6 +1,7 @@
 package service
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -225,4 +226,30 @@ func TokenGenerate(t1 int, params *dto.Response) (token int, err error) {
 	}
 
 	return 0, nil
+}
+func (f *UserService) ChangePassword(r *http.Request, params *dto.ChangePassword, reply *string) error {
+
+	return PasswordChange(params, reply)
+}
+
+func PasswordChange(params *dto.ChangePassword, reply *string) error {
+	var user dto.Admin
+	err := db.Find(&user, bson.M{"username": params.Username})
+	if err != nil {
+		return errors.New("user not found")
+	}
+	passerr := bcrypt.CompareHashAndPassword(user.Hash, []byte(params.OldPassword))
+	if passerr != nil {
+		return errors.New("oldpassword not match")
+	}
+	if passerr == nil {
+		PasswordHash, _ := bcrypt.GenerateFromPassword([]byte(params.NewPassword), 5)
+		user.Hash = PasswordHash
+		var usr dto.Admin
+		db.Update(&usr, bson.M{"username": params.Username}, bson.M{"$set": bson.M{"hash": user.Hash}})
+		*reply = "password changed successfully"
+	}
+
+	return nil
+
 }

@@ -34,3 +34,9 @@ type Token struct {
 	TokenNo int    `json:"token,omitempty",bson:"token,omitempty"`
 	Date    string `json:"date,omitempty",bson:"date,omitempty"`
 }
+
+type ChangePassword struct {
+	Username    string `json:"username"bson:"username"`
+	OldPassword string `json:"oldpassword"bson:"oldpassword"`
+	NewPassword string `json:"newpassword"bson:"newpassword"`
+}
