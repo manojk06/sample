@@ -23,7 +23,6 @@ export class AdminComponent implements OnInit {
       "id": 1
     }
     this.appservice.getPost(obj).subscribe(data =>{
-      console.log(data.result)
       if(data.result!=null){
         this.dataSource= new MatTableDataSource<any>(data.result)
         this.dataSource.paginator=this.paginator;

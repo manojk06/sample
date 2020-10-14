@@ -34,10 +34,6 @@ export class RatingComponent implements OnInit {
         let a = this.now.split(':')[0]
         this.t1 = Number(a)
         this.date = this.datePipe.transform(this.time, "y-MMMM-dd")
-        console.log(this.t1)
-        console.log(this.date)
-        console.log(this.now)
-
         this.interval();
     }
     interval() {
@@ -55,25 +51,19 @@ export class RatingComponent implements OnInit {
     }
     feedback() {
         if (this.value !== undefined) {
-            console.log(this.rollno)
             if (this.t1 >= 8 && this.t1 < 10) {
                 this.yesterday = new Date(this.time.setDate(this.time.getDate() - 1))
                 this.date = this.datePipe.transform(this.yesterday, "y-MMMM-dd")
-                console.log("for dinner feedback date", this.date)
 
             }
             let result = Number(this.value)
-            console.log(result)
-            console.log(this.date)
             let dialogRef = this.dialog.open(
                 ConfirmDialogComponent, { data: { duration: this.duration, result: result } }
             );
             dialogRef.afterClosed().subscribe(result => {
                 if (result) {
-                    console.log(result)
                     let obj = { "id": 1, "method": "UserService.FeedBack", "params": [{ "rollno": this.rollno, "time": this.date, "value": result }] };
                     this.appService.getPost(obj).subscribe(data => {
-                        console.log(data.result)
                         let token=String(data.result)
                         this.appService.setToken(token)
                         this.router.navigate(['/token'])

@@ -118,15 +118,17 @@ func LoginStudent(args *dto.Student, reply *string) error {
 
 }
 func (f *UserService) FeedBack(r *http.Request, params *dto.Response, reply *int) error {
+	log.Println("value", params)
 	t := time.Now()
 	t1 := t.Hour()
 	log.Println("time is:", t1)
 	var err error
 	var token int
+	var res dto.Response
 	if t1 >= 12 && t1 < 15 {
 		token, err = TokenGenerate(t1, params)
 		log.Println("lunch Token is ", token)
-		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"breakfast": params.Value}})
+		err = db.Update(&res, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"breakfast": params.Value, "value": params.Value}})
 		if err != nil {
 			log.Println(" err in update :", err)
 			return err
@@ -134,11 +136,11 @@ func (f *UserService) FeedBack(r *http.Request, params *dto.Response, reply *int
 	} else if t1 >= 20 && t1 < 22 {
 		token, err = TokenGenerate(t1, params)
 		log.Println("dinner Token is ", token)
-		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": "2020-October-1"}, bson.M{"$set": bson.M{"lunch": params.Value}})
+		err = db.Update(&res, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"lunch": params.Value, "value": params.Value}})
 	} else if t1 >= 8 && t1 < 10 {
 		token, err = TokenGenerate(t1, params)
 		log.Println("BreakFast Token is ", token)
-		err = db.Update(&params, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"dinner": params.Value}})
+		err = db.Update(&res, bson.M{"rollno": params.RollNo, "time": params.Time}, bson.M{"$set": bson.M{"dinner": params.Value, "value": params.Value}})
 	}
 	if err != nil {
 		log.Println(" err in update :", err)
@@ -252,4 +254,15 @@ func PasswordChange(params *dto.ChangePassword, reply *string) error {
 
 	return nil
 
+}
+func (f *UserService) GetRating(r *http.Request, args *dto.Response, reply *dto.Response) error {
+	log.Println("rating called...")
+	err := db.Find(&reply, bson.M{"rollno": args.RollNo})
+	if err != nil {
+		return errors.New("rating empty")
+	}
+	if reply.Value == 0 {
+		return errors.New("rating not given")
+	}
+	return nil
 }

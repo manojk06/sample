@@ -25,7 +25,6 @@ export class ChangePasswordComponent implements OnInit {
       "id": 1
     }
    this.appService.getPost(obj).subscribe(data =>{
-     console.log(data)
      if(data.result!=null){
       this.appService.addSuccessMsg(data.result)
     this.router.navigate(['/login'])

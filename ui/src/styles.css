@@ -58,7 +58,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
   .table{
     width: 80%;
-    margin-top: 80px;
+    margin-top: 40px;
     margin-left: 150px;
     position: absolute;
   } 
@@ -82,7 +82,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 } 
  .button{
   right: 40px;
-  top: 40px !important;
+  top: 20px !important;
   position: absolute;
   color: blue;
 }
@@ -123,4 +123,40 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-left: 450px;
   width: 500px;
 }
-  
+.spacer {
+  width: 100%;
+  height: 10px;
+}
+
+.width12p {
+  width: 12%;
+}
+
+
+.backgr2 {
+  background-color: white;
+  padding-right: 35px;
+  padding-left: 3px;
+  border: 1px solid #C0C0C0;
+  color: red;
+  text-align: center;
+  font-size: 15px;
+}
+
+.backgr1 {
+  font-weight:bold;
+  background-color: white;
+  text-align: left;
+  padding-right: 4px;
+  padding-left: 10px;
+  color: blue;
+  font-size: 20px;
+}
+.table1{
+  margin-left: 100px !important;
+  position: absolute; 
+} 
+.mat-row:hover {
+  cursor: pointer;
+  background-color:lightblue;
+}

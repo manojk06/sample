@@ -32,8 +32,11 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('role', data)
       if (data == 'Login successfully') {
         this.router.navigate(['/admin'])
-      } else {
-        this.router.navigate(['/login'])
+      }
+
+    },(err)=>{
+      if (err){
+        this.appService.addErrorMsg("invalid Credential")
       }
 
     })
@@ -48,18 +51,17 @@ export class LoginComponent implements OnInit {
     this.http.post<any>('/loginstudent', this.obj).subscribe(data => {
      
       if (data) {
-        console.log(data)
         this.appService.setStudent(data)
         this.appService.setRollNo(this.rollNo)
         this.router.navigate(['/ratings'])
       } else {
-        
         this.router.navigate(['/login'])
       }
 
     },(error)=>{
-      console.log(error)
-      this.appService.addErrorMsg("invalid Creditial")
+      if (error){
+        this.appService.addErrorMsg("invalid Credential")
+      }
     })
 
   }
