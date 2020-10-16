@@ -1,60 +1,60 @@
 <div class="background1">
-    <a class="button" [routerLink]="['/addstudent']">ADD- <i class="fas fa-user-graduate"></i></a>
-    <div class="table">
-        <div class="mat-elevation-z8">
-            <table mat-table [dataSource]="dataSource">
-              <ng-container matColumnDef="RollNo">
-                <th mat-header-cell *matHeaderCellDef> RollNo </th>
-                <td mat-cell *matCellDef="let row"> {{row.rollno}} </td>
-              </ng-container>
-              <ng-container matColumnDef="Name">
-                <th mat-header-cell *matHeaderCellDef > Name </th>
-                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
-              </ng-container>
-              <ng-container matColumnDef="Dob">
-                <th mat-header-cell *matHeaderCellDef > Dateofbirth </th>
-                <td mat-cell *matCellDef="let row"> {{row.dob}} </td>
-              </ng-container>
-              <ng-container matColumnDef="ContactNumber">
-                <th mat-header-cell *matHeaderCellDef > ContactNumber </th>
-                <td mat-cell *matCellDef="let row"> {{row.contactnumber}} </td>
-              </ng-container>
-              <ng-container matColumnDef="Joining Date">
-                <th mat-header-cell *matHeaderCellDef > Joining Date </th>
-                <td mat-cell *matCellDef="let row"> {{row.joiningdate | date:'yyyy-MM-dd'}} </td>
-              </ng-container>
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getStudent(row)"[ngClass]="{'highlight' : row.id== selectedRow}"></tr>
-            </table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 25,50]"></mat-paginator>
-        </div> <br>
-        <div class="table1">
-            <table   style="border: 1px solid gray;width: 95%;">
-                <tbody>
-                    <tr>
-                        <td class="backgr1 width12p">Student Name</td>
-                        <td class="backgr2 width12p">{{selectedStudent.name}}</td>
-                        <td class="backgr1 width12p">Roll Number</td>
-                        <td class="backgr2 width12p">{{selectedStudent.rollno}}</td>
-                    </tr>
-                    <tr>
-                        <td class="backgr1 width12p">Contact Number</td>
-                        <td class="backgr2 width12p">{{selectedStudent.contactnumber}}</td>
-                        <td class="backgr1 width12p">Date</td>
-                        <td class="backgr2 width12p">{{detail.Time | date:'yyyy-MM-dd'}}</td>
-                    </tr>
-                    <tr>
-                        <td class="backgr1 width12p">Duration</td>
-                        <td class="backgr2 width12p">{{duration}}</td>
-                        <td class="backgr1 width12p">Rating</td>
-                        <td class="backgr2 width12p">{{detail.Value}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <a class="button" [routerLink]="['/addstudent']">ADD- <i class="fas fa-user-graduate"></i></a><br>
+  <div class="count"><span style="font-weight: bold;font-size: 25px;color: blue;">Total No of Students:
+      {{count}}</span>&nbsp;&nbsp;
+    <mat-form-field appearance="fill">
+      <input matInput [max]="maxDate | date:'yyyy-MM-dd'" [matDatepicker]="picker1" [(ngModel)]="obj.date" name="date">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>&nbsp;&nbsp;&nbsp;
+    <button mat-raised-button color="primary" (click)="clear()">Clear</button>&nbsp;&nbsp;
+  </div>&nbsp;
+  <div class="table">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="RollNo">
+          <th mat-header-cell *matHeaderCellDef> RollNo </th>
+          <td mat-cell *matCellDef="let row"> {{row.rollno}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Dob">
+          <th mat-header-cell *matHeaderCellDef> Dateofbirth </th>
+          <td mat-cell *matCellDef="let row"> {{row.dob}} </td>
+        </ng-container>
+        <ng-container matColumnDef="ContactNumber">
+          <th mat-header-cell *matHeaderCellDef> ContactNumber </th>
+          <td mat-cell *matCellDef="let row"> {{row.contactnumber}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Joining Date">
+          <th mat-header-cell *matHeaderCellDef> Joining Date </th>
+          <td mat-cell *matCellDef="let row"> {{row.joiningdate | date:'yyyy-MM-dd'}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getStudent(row)"
+          [ngClass]="{'highlight' : row.id == selectedRow}"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25,50]"></mat-paginator>
+    </div><br>
+    <div class="table1">
+      <table style="border: 1px solid gray;width: 95%;">
+        <tbody>
+          <ng-container *ngFor="let data of detail | keyvalue">
+            <tr>
+              <td class="backgr1 width12p">{{data.key}}</td>
+              <td class="backgr2 width12p">{{data.value}}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table><br>
+      <div class="average" *ngIf="flag">
+        <span style="width: 100%;;font-weight: bold;color: blue;background-color: white;font-size:large;">{{obj.date | date:'yyyy-MM-dd'}} - {{name}}
+          -{{average ? 'Average of Rating is  '+ average:'The other session rating is empty so taken approx Average  4'}}</span>
       </div>
-      </div>
- 
-
-
-
+    </div>
+    
+  </div>
+  
+</div>

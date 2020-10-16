@@ -118,7 +118,6 @@ func LoginStudent(args *dto.Student, reply *string) error {
 
 }
 func (f *UserService) FeedBack(r *http.Request, params *dto.Response, reply *int) error {
-	log.Println("value", params)
 	t := time.Now()
 	t1 := t.Hour()
 	log.Println("time is:", t1)
@@ -198,33 +197,33 @@ func TokenGenerate(t1 int, params *dto.Response) (token int, err error) {
 	var Token dto.Token
 	time := time.Now()
 	day := time.Format("2006-January-02")
-	db.Find(&Token, nil)
+	db.Find(&Token, bson.M{"date": day})
 	T := Token.TokenNo
 	log.Println(T)
-	Token.TokenNo = T + 1
+	To := T + 1
 	if t1 >= 12 && t1 < 15 {
 		log.Println("token generated for lunch")
-		db.Update(&Token, bson.M{"date": day}, bson.M{"$set": bson.M{"tokenno": Token.TokenNo}})
+		db.Update(&Token, bson.M{"date": day}, bson.M{"$set": bson.M{"tokenno": To}})
 		if err != nil {
 			return 0, err
 		}
-		return Token.TokenNo, nil
+		return To, nil
 	} else if t1 >= 20 && t1 < 22 {
 		log.Println("token generated for dinner")
 
-		db.Update(&Token, bson.M{"date": day}, bson.M{"$set": bson.M{"tokenno": Token.TokenNo}})
+		db.Update(&Token, bson.M{"date": day}, bson.M{"$set": bson.M{"tokenno": To}})
 		if err != nil {
 			return 0, err
 		}
-		return Token.TokenNo, nil
+		return To, nil
 	} else if t1 >= 8 && t1 < 10 {
 		log.Println("token generated for BreakFast")
 
-		db.Update(&Token, bson.M{"date": day}, bson.M{"$set": bson.M{"tokenno": Token.TokenNo}})
+		db.Update(&Token, bson.M{"date": day}, bson.M{"$set": bson.M{"tokenno": To}})
 		if err != nil {
 			return 0, err
 		}
-		return Token.TokenNo, nil
+		return To, nil
 	}
 
 	return 0, nil
@@ -256,8 +255,7 @@ func PasswordChange(params *dto.ChangePassword, reply *string) error {
 
 }
 func (f *UserService) GetRating(r *http.Request, args *dto.Response, reply *dto.Response) error {
-	log.Println("rating called...")
-	err := db.Find(&reply, bson.M{"rollno": args.RollNo})
+	err := db.Find(&reply, bson.M{"rollno": args.RollNo, "time": args.Time})
 	if err != nil {
 		return errors.New("rating empty")
 	}

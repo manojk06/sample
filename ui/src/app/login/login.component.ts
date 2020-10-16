@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
 
     },(error)=>{
       if (error){
-        this.appService.addErrorMsg("invalid Credential")
+        this.appService.addErrorMsg(error.error)
       }
     })
 

@@ -12,7 +12,7 @@ import { state } from '@angular/animations';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title :string='My Map test project';
+  title :string='Food Ratings';
   choose:any;
   time= new Date();
   timer;

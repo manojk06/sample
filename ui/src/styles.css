@@ -138,7 +138,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding-right: 35px;
   padding-left: 3px;
   border: 1px solid #C0C0C0;
-  color: red;
+  color:green;
   text-align: center;
   font-size: 15px;
 }
@@ -156,7 +156,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-left: 100px !important;
   position: absolute; 
 } 
-.mat-row:hover {
+
+.count{
+    margin-left: 150px;
+    position: absolute;
+    background-color: white;
+}
+.highlight:hover{
   cursor: pointer;
-  background-color:lightblue;
+  background:lightblue; 
+}
+.average{
+  margin-left: 150px !important;
+  position: absolute;
 }
